@@ -53,7 +53,7 @@ namespace GadgetHub.WebUI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            System.Web.Mvc.DependencyResolver(new GadgetHub.WebUI.Infrastructure.NinjectDependencyResolver(kernel));
+            System.Web.Mvc.DependencyResolver.SetResolver(new GadgetHub.WebUI.Infrastructure.NinjectDependencyResolver(kernel));
         }        
     }
 }
