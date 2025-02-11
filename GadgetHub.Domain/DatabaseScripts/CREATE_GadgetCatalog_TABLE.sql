@@ -1,0 +1,14 @@
+﻿USE GadgetHub;
+GO
+
+IF NOT EXISTS (SELECT * FROM GadgetHub.INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'GadgetCatalog')
+BEGIN
+	CREATE TABLE GadgetCatalog (
+		Id INT IDENTITY(1,1) PRIMARY KEY,
+		[Name] VARCHAR(100),
+		Brand VARCHAR(100),
+		Price DECIMAL(10,2),
+		[Description] VARCHAR(500),
+		Category VARCHAR(100)
+	)
+END
