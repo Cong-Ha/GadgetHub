@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GadgetHub.Domain.Abstract;
+using GadgetHub.WebUI.Models;
 
 namespace GadgetHub.WebUI.Controllers
 {
@@ -16,10 +17,26 @@ namespace GadgetHub.WebUI.Controllers
             gadgetRepo = repo;
         }
 
-        // GET: GadgetCatalog
-        public ViewResult List()
+        public int PageSize = 4;
+        public ViewResult List(string category, int page = 1)
         {
-            return View(gadgetRepo.GadgetCatalogs);
+            GadgetListViewModel model = new GadgetListViewModel
+            {
+                Catalog = gadgetRepo.GadgetCatalogs
+                    .Where(g => category == null || g.Category == category)
+                    .OrderBy(g => g.Id)
+                    .Skip((page - 1) * PageSize)
+                    .Take(PageSize),
+                PageInfo = new PageInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = gadgetRepo.GadgetCatalogs.Count()
+                },
+                CurrentCategory = category
+            };
+            return View(model);
         }
+
     }
 }
