@@ -1,19 +1,16 @@
-﻿@using GadgetHub.Domain.Entities
-@model IEnumerable<GadgetCatalog>
+﻿@model GadgetHub.WebUI.Models.GadgetListViewModel
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Catalog";
 }
 
-@foreach(var g in Model)
+@foreach(var g in Model.Catalog)
 {
-    <div>
-        <h3>Name = @g.Name</h3>
-        <h3>Brand = @g.Brand</h3>
-        <h3>Category = @g.Category</h3>
-        <h3>Description = @g.Description</h3>
-        <h3>Price = @g.Price</h3>
-    </div>
-    <p>---------------------------------------</p>
+    @Html.Partial("GadgetCatalogSummary", g);
 }
+
+@*Pagination*@
+<div class="btn-group float-end">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+</div>
 
