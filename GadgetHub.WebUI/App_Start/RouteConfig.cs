@@ -13,12 +13,6 @@ namespace GadgetHub.WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.MapRoute(
-            //    name: "Default",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "GadgetCatalog", action = "List", id = UrlParameter.Optional }
-            //);
-
             //page 1 category
             routes.MapRoute(null, "", new
             {
@@ -29,7 +23,7 @@ namespace GadgetHub.WebUI
             });
 
             //page 2 - list specified page showing all items from all categories
-            routes.MapRoute(null, "", new
+            routes.MapRoute(null, "Page{page}", new
             {
                 controller = "GadgetCatalog",
                 action = "List",
@@ -45,7 +39,7 @@ namespace GadgetHub.WebUI
 
             routes.MapRoute(null, "{category}/Page{page}", new
             {
-                controller = "GadgetHub",
+                controller = "GadgetCatalog",
                 action = "List",
 
             }, new { page = @"\d+" });

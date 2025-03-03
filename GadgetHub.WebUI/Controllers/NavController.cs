@@ -17,8 +17,9 @@ namespace GadgetHub.WebUI.Controllers
             _catalogRepository = catalogRepository;
         }
 
-        public PartialViewResult Menu()
+        public PartialViewResult Menu(string category = null)
         {
+            ViewBag.SelectedCategory = category;
             IEnumerable<string> categories = _catalogRepository.GadgetCatalogs
                 .Select(c => c.Category)
                 .Distinct()
