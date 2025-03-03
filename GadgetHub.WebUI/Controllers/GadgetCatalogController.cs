@@ -31,7 +31,9 @@ namespace GadgetHub.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = gadgetRepo.GadgetCatalogs.Count()
+                    TotalItems = category == null ?
+                        gadgetRepo.GadgetCatalogs.Count() :
+                        gadgetRepo.GadgetCatalogs.Where(g => g.Category == category).Count()
                 },
                 CurrentCategory = category
             };
