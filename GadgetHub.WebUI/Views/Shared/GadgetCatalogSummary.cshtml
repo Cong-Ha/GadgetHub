@@ -1,11 +1,19 @@
 ﻿@model GadgetHub.Domain.Entities.GadgetCatalog
 
-<div class="card p-3 bg-light text-dark mb-2">
-    <h3>
-        <strong>@Model.Name</strong>
-        <span class="badge bg-primary float-end">
-            @Model.Price.ToString("c")
-        </span>
-    </h3>
-    <span class="lead">@Model.Description</span>
+<div class="card p-3 bg-dark border-light text-light mb-3">
+    <div class="card-body">
+        <h5 class="card-title">
+            <strong>@Model.Name</strong>
+            <span class="badge bg-primary float-end">
+                @Model.Price.ToString("c")
+            </span>
+        </h5>
+        <p class="card-text">@Model.Description</p>
+        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.Id)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <button type="submit" class="btn btn-success float-end">Add to cart!</button>
+        }
+    </div>
 </div>

@@ -1,0 +1,39 @@
+﻿@model GadgetHub.Domain.Entities.ShippingDetails
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<div class="text-light">
+    <h2>Checkout</h2>
+
+    <p>Please enter your details</p>
+
+    @using (Html.BeginForm())
+    {
+        <h3>Ship to</h3>
+
+        foreach (var property in ViewData.ModelMetadata.Properties)
+        {
+            if (property.PropertyName != "GiftWrap")
+            {
+                <div class="form-group">
+                    <label>@(property.DisplayName ?? property.PropertyName):</label>
+                    @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                </div>
+            }
+
+        }
+
+        <h3>Options</h3>
+        <div class="checkboxc">
+            @Html.CheckBoxFor(x => x.GiftWrap)
+            Gift wrap these items
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary" type="submit" value="Complete order" />
+        </div>
+    }
+</div>
+
+

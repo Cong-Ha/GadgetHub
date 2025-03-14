@@ -4,13 +4,18 @@
     ViewBag.Title = "Catalog";
 }
 
-@foreach(var g in Model.Catalog)
-{
-    @Html.Partial("GadgetCatalogSummary", g);
-}
+<div class="d-flex flex-row flex-wrap gap-3 row-cols-sm-4 justify-content-center">
+    @foreach (var g in Model.Catalog)
+    {
+        @Html.Partial("GadgetCatalogSummary", g);
+    }
+</div>
 
 @*Pagination*@
-<div class="btn-group float-end">
-    @Html.PageLinks(Model.PageInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+<div class="d-flex justify-content-center">
+    <div class="btn-group float-end border text-bg-light">
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+    </div>
 </div>
+
 

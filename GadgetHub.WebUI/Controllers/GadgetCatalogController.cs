@@ -17,7 +17,7 @@ namespace GadgetHub.WebUI.Controllers
             gadgetRepo = repo;
         }
 
-        public int PageSize = 4;
+        public int PageSize = 6;
         public ViewResult List(string category, int page = 1)
         {
             GadgetListViewModel model = new GadgetListViewModel
