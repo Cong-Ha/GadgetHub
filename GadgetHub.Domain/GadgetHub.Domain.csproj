@@ -76,7 +76,9 @@
     <Compile Include="Class1.cs" />
     <Compile Include="DataBaseAccess\EFDbContext.cs" />
     <Compile Include="DataBaseAccess\Repository\GadgetCatalogRepository.cs" />
+    <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\GadgetCatalog.cs" />
+    <Compile Include="Entities\ShippingDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
