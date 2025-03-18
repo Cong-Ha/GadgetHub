@@ -12,7 +12,7 @@ namespace GadgetHub.Domain.Entities
         [Required(ErrorMessage = "Please enter full name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please enter the first address line")]
+        [Required(ErrorMessage = "Please enter a valid address")]
         [Display(Name = "Line 1")]
         public string Line1 { get; set; }
         [Display(Name = "Line 2")]
@@ -20,7 +20,7 @@ namespace GadgetHub.Domain.Entities
         [Display(Name = "Line 3")]
         public string Line3 { get; set; }
 
-        [Required(ErrorMessage = "Please enter City name")]
+        [Required(ErrorMessage = "Please enter city")]
         public string City { get; set; }
 
         [Required(ErrorMessage = "Please enter a state name")]
