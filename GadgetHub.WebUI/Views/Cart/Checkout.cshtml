@@ -12,6 +12,7 @@
         <div class="w-100">
             @using (Html.BeginForm())
             {
+                @Html.ValidationSummary();
                 <h3>Ship to:</h3>
 
                 foreach (var property in ViewData.ModelMetadata.Properties)
@@ -36,7 +37,7 @@
                     <input class="btn btn-primary" type="submit" value="Complete order" />
                 </div>
             }
-        </div
+        </div>
     </div>
 </div>
 
