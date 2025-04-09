@@ -9,10 +9,12 @@ namespace GadgetHub.WebUI.Controllers
     public class CartController : Controller
     {
         private readonly IGadgetCatalogRepository _gadgetCatalogRepository;
+        private readonly IOrderProcessor _orderProcessor;
 
-        public CartController(IGadgetCatalogRepository gadgetCatalogRepository)
+        public CartController(IGadgetCatalogRepository gadgetCatalogRepository, IOrderProcessor orderProcessor)
         {
             _gadgetCatalogRepository = gadgetCatalogRepository;
+            _orderProcessor = orderProcessor;
         }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace GadgetHub.WebUI.Controllers
             }
             if (ModelState.IsValid)
             {
-               // _orderProcessor.ProcessOrder(cart, shippingDetails); --TODO
+               _orderProcessor.ProcessOrder(cart, shippingDetails);
                 cart.Clear();
                 return View("Completed", shippingDetails);
             }
