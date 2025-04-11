@@ -12,9 +12,40 @@ namespace GadgetHub.Domain.DataBaseAccess.Repository
     {
         private readonly EFDbContext _context = new EFDbContext();
 
-        public IEnumerable<GadgetCatalog> GadgetCatalogs 
-        { 
-            get { return _context.GadgetCatalogs; } 
+        public IEnumerable<GadgetCatalog> GadgetCatalogs
+        {
+            get { return _context.GadgetCatalogs; }
+        }
+
+        public void SaveGadget(GadgetCatalog gadget)
+        {
+            if (gadget.Id == 0)
+            {
+                _context.GadgetCatalogs.Add(gadget);
+            }
+            else
+            {
+                GadgetCatalog dbEntry = _context.GadgetCatalogs.Find(gadget.Id);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = gadget.Name;
+                    dbEntry.Description = gadget.Description;
+                    dbEntry.Price = gadget.Price;
+                    dbEntry.Category = gadget.Category;
+                }
+            }
+            _context.SaveChanges();
+        }
+
+        public GadgetCatalog DeleteGadget(int gadgetId)
+        {
+            GadgetCatalog dbEntry = _context.GadgetCatalogs.Find(gadgetId);
+            if (dbEntry != null)
+            {
+                _context.GadgetCatalogs.Remove(dbEntry);
+                _context.SaveChanges();
+            }
+            return dbEntry;
         }
     }
 }
