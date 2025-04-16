@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DatabaseScripts\ALTER_GadgetCatalog.sql" />
     <Content Include="DatabaseScripts\CREATE_GadgetCatalog_TABLE.sql" />
     <Content Include="DatabaseScripts\INSERT-MERGE_GadgetCatalog.sql" />
   </ItemGroup>

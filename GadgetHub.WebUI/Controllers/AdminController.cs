@@ -8,6 +8,7 @@ using GadgetHub.Domain.Abstract;
 
 namespace GadgetHub.WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IGadgetCatalogRepository _gadgetCatalogRepo;
@@ -32,10 +33,17 @@ namespace GadgetHub.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(GadgetCatalog gadget)
+        public ActionResult Edit(GadgetCatalog gadget, HttpPostedFileBase image=null)
         {
             if (ModelState.IsValid)
             {
+                if(image != null)
+                {
+                    gadget.ImageMimeType = image.ContentType;
+                    gadget.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(gadget.ImageData, 0, image.ContentLength);
+                }
+
                 _gadgetCatalogRepo.SaveGadget(gadget);
                 TempData["message"] = string.Format("{0} has been saved", gadget.Name);
                 return RedirectToAction("Index");

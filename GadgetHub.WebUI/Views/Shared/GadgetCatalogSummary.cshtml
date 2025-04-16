@@ -1,6 +1,10 @@
 ﻿@model GadgetHub.Domain.Entities.GadgetCatalog
 
-<div class="card p-3 bg-dark border-light text-light mb-3">
+<div class="card h-100 p-3 bg-dark border-light text-light mb-3">
+    @if(Model.ImageData != null)
+    {
+        <img class="card-img-top img-fluid d-block mx-auto" style="width:200px; height:200px; object-fit:fill;" alt="Image of product" src="@Url.Action("GetImage", "GadgetCatalog", new { Model.Id })"/>
+    }
     <div class="card-body">
         <h5 class="card-title">
             <strong>@Model.Name</strong>
@@ -13,7 +17,7 @@
         {
             @Html.HiddenFor(x => x.Id)
             @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-            <button type="submit" class="btn btn-success float-end">Add to cart!</button>
+            <button type="submit" class="btn btn-success d-block mx-auto">Add to cart!</button>
         }
     </div>
 </div>

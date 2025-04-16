@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GadgetHub.Domain.Abstract;
+using GadgetHub.Domain.Entities;
 using GadgetHub.WebUI.Models;
 
 namespace GadgetHub.WebUI.Controllers
@@ -40,5 +41,18 @@ namespace GadgetHub.WebUI.Controllers
             return View(model);
         }
 
+        public FileContentResult GetImage(int Id)
+        {
+            GadgetCatalog gadget = gadgetRepo.GadgetCatalogs
+                .FirstOrDefault(g => g.Id == Id);
+            if (gadget != null)
+            {
+                return File(gadget.ImageData, gadget.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
