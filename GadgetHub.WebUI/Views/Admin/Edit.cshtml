@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm("Edit", "Admin"))
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="container mt-3">
         <div class="card mt-5">
@@ -18,22 +18,52 @@
             @Html.HiddenFor(x => x.Id)
             @foreach (var property in ViewData.ModelMetadata.Properties)
             {
-                if (property.PropertyName != "Id")
+                switch (property.PropertyName)
                 {
-                    <div class="mb-3">
-                        <label class="form-label">@(property.DisplayName ?? property.PropertyName)</label>
-                        @if (property.PropertyName == "Description")
-                        {
-                            @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
-                        }
-                        else
-                        {
-                            @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
-                        }
-                        @Html.ValidationMessage(property.PropertyName, "", new { @class = "text-danger" })
-                    </div>
+                    case "Id":
+                    case "ImageData":
+                    case "ImageMimeType":
+                        break;
+                    default:
+                    {
+                        <div class="mb-3">
+                            <label class="form-label">@(property.DisplayName ?? property.PropertyName)</label>
+                            @if (property.PropertyName == "Description")
+                            {
+                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
+                            }
+                            else
+                            {
+                                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                            }
+                            @Html.ValidationMessage(property.PropertyName, "", new { @class = "text-danger" })
+                        </div>
+                    }
+                    break;
                 }
             }
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <div style="position:relative;">
+                    <a class="btn btn-outline-primary" href="javascript:;">
+                        Choose file
+                        <input type="file" name="image" size="40"
+                            style="position:absolute;z-index:2;top:0;left:0;opacity:0;
+                            background-color:transparent;color:transparent;"
+                            onchange='$("#upload-file-info").html($(this).val());'/>
+                    </a>
+                    <span class="form-label label-info" id="upload-file-info"></span>
+                </div>
+            </div>
+            @if(Model.ImageData == null)
+            {
+                <div class="form-text">No Image</div>
+            }
+            else
+            {
+                <img class="img-thumbnail mt-3" width="150" height="150" src='@Url.Action("GetImage", "GadgetCatalog", new { Model.Id })'/>
+            }
+
         </div>
         <div class="card-footer">
             <input type="submit" value="Save" class="btn btn-primary" />

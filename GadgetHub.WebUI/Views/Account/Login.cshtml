@@ -1,0 +1,30 @@
+﻿@model GadgetHub.WebUI.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container d-flex row-cols-3 justify-content-center mt-5">
+    <div class="card bg-dark text-light border">
+        <div class="card-header border">
+            <h3>Login</h3>
+        </div>
+        <div class="card-body">
+            <p class="lead">Please log in to access admin area.</p>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username:</label>
+                    @Html.TextBoxFor(m => m.Username, new { id = "Username", @class = "form-control", placeholder = "Enter your username" })
+
+                    <label for="password" class="form-label">Password:</label>
+                    @Html.PasswordFor(m => m.Password, new { id = "Password", @class = "form-control", placeholder = "Enter your password" })
+                </div>
+                <button class="btn btn-primary" type="submit">Login</button>
+            }
+        </div>
+    </div>
+</div>
+

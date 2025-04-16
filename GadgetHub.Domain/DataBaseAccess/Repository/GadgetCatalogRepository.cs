@@ -32,6 +32,9 @@ namespace GadgetHub.Domain.DataBaseAccess.Repository
                     dbEntry.Description = gadget.Description;
                     dbEntry.Price = gadget.Price;
                     dbEntry.Category = gadget.Category;
+                    dbEntry.Brand = gadget.Brand;
+                    dbEntry.ImageData = gadget.ImageData;
+                    dbEntry.ImageMimeType = gadget.ImageMimeType;
                 }
             }
             _context.SaveChanges();
